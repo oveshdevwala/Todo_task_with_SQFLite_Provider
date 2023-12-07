@@ -128,19 +128,22 @@ class alltask extends StatelessWidget {
                                     child: Container(
                                       child: Row(
                                         children: [
-                                          Checkbox.adaptive(
-                                              value: provider.data[index]
-                                                          .modelCompleted ==
-                                                      0
-                                                  ? false
-                                                  : true,
-                                              activeColor:
-                                                  Colors.green.shade700,
-                                              onChanged: (value) {
-                                                provider
-                                                    .completedChacker(index);
-                                                provider.facthData();
-                                              }),
+                                          SizedBox(
+                                            width: 20,
+                                            child: Checkbox.adaptive(
+                                                value: provider.data[index]
+                                                            .modelCompleted ==
+                                                        0
+                                                    ? false
+                                                    : true,
+                                                activeColor:
+                                                    Colors.green.shade700,
+                                                onChanged: (value) {
+                                                  provider
+                                                      .completedChacker(index);
+                                                  provider.facthData();
+                                                }),
+                                          ),
                                           SizedBox(
                                             width: 15,
                                           ),
@@ -230,7 +233,10 @@ void showmodel(int mindex, context) {
       context: context,
       backgroundColor: uiColors.shade200,
       shape: RoundedRectangleBorder(
-          side: BorderSide(color: uiColors.white),
+          side: BorderSide(
+            color: uiColors.white,
+            width: 2,
+          ),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20))),
       builder: (context) => Container(
@@ -249,13 +255,22 @@ void showmodel(int mindex, context) {
                           filled: true,
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: uiColors.white)),
+                              borderSide: BorderSide(
+                                color: uiColors.white,
+                                width: 2,
+                              )),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: uiColors.white)),
+                              borderSide: BorderSide(
+                                color: uiColors.white,
+                                width: 2,
+                              )),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: uiColors.white))),
+                              borderSide: BorderSide(
+                                color: uiColors.white,
+                                width: 2,
+                              ))),
                     )),
                 SizedBox(
                     width: 150,
@@ -274,7 +289,10 @@ void showmodel(int mindex, context) {
                             backgroundColor: uiColors.shade200,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                side: BorderSide(color: uiColors.white))),
+                                side: BorderSide(
+                                  color: uiColors.white,
+                                  width: 2,
+                                ))),
                         child: Consumer<TaskProvider>(
                             builder: (context, provider, child) {
                           return Text(

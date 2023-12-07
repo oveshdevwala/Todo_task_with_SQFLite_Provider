@@ -47,19 +47,22 @@ class PendingTask extends StatelessWidget {
                                     child: Container(
                                       child: Row(
                                         children: [
-                                          Checkbox.adaptive(
-                                              value: provider.data[index]
-                                                          .modelCompleted ==
-                                                      0
-                                                  ? false
-                                                  : true,
-                                              activeColor:
-                                                  Colors.green.shade700,
-                                              onChanged: (value) {
-                                                provider
-                                                    .completedChacker(index);
-                                                provider.facthPending();
-                                              }),
+                                          SizedBox(
+                                            width: 20,
+                                            child: Checkbox.adaptive(
+                                                value: provider.data[index]
+                                                            .modelCompleted ==
+                                                        0
+                                                    ? false
+                                                    : true,
+                                                activeColor:
+                                                    Colors.green.shade700,
+                                                onChanged: (value) {
+                                                  provider
+                                                      .completedChacker(index);
+                                                  provider.facthPending();
+                                                }),
+                                          ),
                                           SizedBox(
                                             width: 15,
                                           ),

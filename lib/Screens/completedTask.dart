@@ -51,7 +51,8 @@ class completedtaskView extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                         shadowColor: uiColors.black,
                                         shape: RoundedRectangleBorder(
-                                            side: BorderSide(width: 2,
+                                            side: BorderSide(
+                                                width: 2,
                                                 color: uiColors.white),
                                             borderRadius:
                                                 BorderRadius.circular(11)),
@@ -59,18 +60,21 @@ class completedtaskView extends StatelessWidget {
                                     child: Container(
                                       child: Row(
                                         children: [
-                                          Checkbox.adaptive(
-                                              value: provider.data[index]
-                                                          .modelCompleted ==
-                                                      0
-                                                  ? false
-                                                  : true,
-                                              activeColor: uiColors.shade700,
-                                              onChanged: (value) {
-                                                provider
-                                                    .completedChacker(index);
-                                                provider.facthCompleted();
-                                              }),
+                                          SizedBox(
+                                            width: 20,
+                                            child: Checkbox.adaptive(
+                                                value: provider.data[index]
+                                                            .modelCompleted ==
+                                                        0
+                                                    ? false
+                                                    : true,
+                                                activeColor: uiColors.shade700,
+                                                onChanged: (value) {
+                                                  provider
+                                                      .completedChacker(index);
+                                                  provider.facthCompleted();
+                                                }),
+                                          ),
                                           SizedBox(
                                             width: 15,
                                           ),

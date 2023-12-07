@@ -16,7 +16,10 @@ class completedtaskView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: uiColors.shade100,
-          title: Text('Completed'),
+          title: Text(
+            'Completed Task',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           // bottom: TabBar(
           //     dividerColor: Colors.transparent,
           //     labelColor: uiColors.black,
@@ -48,8 +51,8 @@ class completedtaskView extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                         shadowColor: uiColors.black,
                                         shape: RoundedRectangleBorder(
-                                            side:
-                                                BorderSide(color: uiColors.white),
+                                            side: BorderSide(width: 2,
+                                                color: uiColors.white),
                                             borderRadius:
                                                 BorderRadius.circular(11)),
                                         backgroundColor: uiColors.shade200),
@@ -62,8 +65,7 @@ class completedtaskView extends StatelessWidget {
                                                       0
                                                   ? false
                                                   : true,
-                                              activeColor:
-                                                  uiColors.shade700,
+                                              activeColor: uiColors.shade700,
                                               onChanged: (value) {
                                                 provider
                                                     .completedChacker(index);
@@ -78,11 +80,16 @@ class completedtaskView extends StatelessWidget {
                                               maxLines: 3,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  decorationColor:
+                                                      uiColors.shade700,
+                                                  decorationThickness: 2.5,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold,
-                                                  color: uiColors.black),
+                                                  color: uiColors.black26),
                                             ),
                                           ),
                                           // Consumer<TaskProvider>(

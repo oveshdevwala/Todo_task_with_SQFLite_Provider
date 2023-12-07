@@ -51,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           backgroundColor: uiColors.shade200,
           indicatorColor: uiColors.shade100,
+          elevation: 0,
+          indicatorShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(11),
+              side: BorderSide(color: uiColors.white, width: 2)),
           destinations: [
             NavigationDestination(
                 icon: Icon(CupertinoIcons.home), label: 'All Task'),
@@ -87,7 +91,7 @@ class alltask extends StatelessWidget {
           },
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
-              side: BorderSide(color: uiColors.white)),
+              side: BorderSide(width: 2, color: uiColors.white)),
           backgroundColor: uiColors.shade200,
           child: Icon(
             Icons.add,
@@ -116,6 +120,7 @@ class alltask extends StatelessWidget {
                                         shadowColor: uiColors.black,
                                         shape: RoundedRectangleBorder(
                                             side: BorderSide(
+                                                width: 2,
                                                 color: uiColors.white),
                                             borderRadius:
                                                 BorderRadius.circular(11)),
@@ -145,6 +150,16 @@ class alltask extends StatelessWidget {
                                               maxLines: 3,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
+                                                  decoration: provider
+                                                              .data[index]
+                                                              .modelCompleted ==
+                                                          1
+                                                      ? TextDecoration
+                                                          .lineThrough
+                                                      : TextDecoration.none,
+                                                  decorationThickness: 2.5,
+                                                  decorationColor:
+                                                      uiColors.shade700,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   fontSize: 15,
@@ -196,7 +211,8 @@ class alltask extends StatelessWidget {
                                       ),
                                     )));
                           });
-                    })
+                    }),
+                    SizedBox(height: 100)
                   ]),
                 )
               : Center(

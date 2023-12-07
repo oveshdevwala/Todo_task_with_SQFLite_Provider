@@ -39,6 +39,7 @@ class PendingTask extends StatelessWidget {
                                         shadowColor: uiColors.black,
                                         shape: RoundedRectangleBorder(
                                             side: BorderSide(
+                                                width: 2,
                                                 color: uiColors.white),
                                             borderRadius:
                                                 BorderRadius.circular(11)),
@@ -123,9 +124,14 @@ class PendingTask extends StatelessWidget {
                   ]),
                 )
               : Center(
-                  child: SizedBox(
-                    height: 250,
-                    child: Lottie.asset('assets/pendingtask.json'),
+                  child: Container(
+                    height: 390,
+                    width: 290,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 4),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Lottie.asset('assets/pendingtask.json',
+                        fit: BoxFit.scaleDown),
                   ),
                 );
         }));

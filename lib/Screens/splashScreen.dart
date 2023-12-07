@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 4700), () {
+    Timer(Duration(milliseconds: 4800), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomeScreen()));
     });
@@ -27,8 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: uiColors.shade100,
       body: Center(
-        child: Container(
-          child: Lottie.asset('assets/splashScreen.json')),
+        child: Container(child: Lottie.asset('assets/splashsceen.json')),
       ),
     );
   }

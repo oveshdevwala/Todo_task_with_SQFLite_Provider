@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:remainder_app/Database/colors.dart';
 import 'package:remainder_app/Provider/notesProvider.dart';
 import 'package:remainder_app/Screens/completedTask.dart';
+import 'package:remainder_app/Screens/pendingTask.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -16,7 +17,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> BotttomNavigationscreens = [alltask(), completedtaskView()];
+  List<Widget> BotttomNavigationscreens = [
+    alltask(),
+    completedtaskView(),
+    PendingTask()
+  ];
   @override
   void initState() {
     super.initState();
@@ -30,17 +35,18 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print('build function Called!!');
-    return Scaffold(
-        bottomNavigationBar:
-            Consumer<TaskProvider>(builder: (context, provider, child) {
+    return Scaffold(bottomNavigationBar:
+        Consumer<TaskProvider>(builder: (context, provider, child) {
       return NavigationBar(
           selectedIndex: provider.mSelectedIndex,
           onDestinationSelected: (index) {
             provider.mSelectedIndex = index;
             if (index == 0) {
               provider.facthData();
-            } else {
+            } else if (index == 1) {
               provider.facthCompleted();
+            } else if (index == 2) {
+              provider.facthPending();
             }
           },
           backgroundColor: uiColors.shade200,
@@ -48,7 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
           destinations: [
             NavigationDestination(
                 icon: Icon(CupertinoIcons.home), label: 'All Task'),
-            NavigationDestination(icon: Icon(Icons.done), label: 'Completed'),
+            NavigationDestination(
+                icon: Icon(Icons.done_all_rounded), label: 'Completed'),
+            NavigationDestination(
+                icon: Icon(Icons.pending_actions), label: 'Pending'),
           ]);
     }), body: Consumer<TaskProvider>(builder: (context, providers, child) {
       return BotttomNavigationscreens[providers.mSelectedIndex];
@@ -68,15 +77,6 @@ class alltask extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: uiColors.shade100,
           title: Text('All Task'),
-          // bottom: TabBar(
-          //     dividerColor: Colors.transparent,
-          //     labelColor: uiColors.black,
-          //     onTap: (value) {},
-          //     indicatorColor: Colors.green.shade400,
-          //     tabs: [
-          //       Text('All Task'),
-          //       Text('Completed Task'),
-          //     ]),
         ),
         backgroundColor: uiColors.shade100,
         floatingActionButton: FloatingActionButton(

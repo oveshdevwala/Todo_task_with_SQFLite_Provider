@@ -55,16 +55,19 @@ CREATE TABLE $dbTable(
   }
 
 // facth task
-  Future<List<rModel>> facthNotes(bool completed) async {
+  Future<List<rModel>> facthNotes(int condition) async {
     var db = await getDb();
 
     List<rModel> arrydata = [];
     var data;
-    if (completed == false) {
+    if (condition == 0) {
       data = await db.query(dbTable);
-    } else {
+    } else if (condition == 1) {
       data =
           await db.query(dbTable, where: '$colCompleted = ?', whereArgs: [1]);
+    } else if (condition == 2) {
+      data =
+          await db.query(dbTable, where: "$colCompleted = ?", whereArgs: [0]);
     }
 
     for (Map<String, dynamic> eachData in data) {

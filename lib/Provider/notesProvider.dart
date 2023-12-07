@@ -30,12 +30,17 @@ class TaskProvider with ChangeNotifier {
   // }
 
   Future<void> facthData() async {
-    data = await db.facthNotes(false);
+    data = await db.facthNotes(0);
     notifyListeners();
   }
 
   void facthCompleted() async {
-    data = await db.facthNotes(true);
+    data = await db.facthNotes(1);
+    notifyListeners();
+  }
+
+  void facthPending() async {
+    data = await db.facthNotes(2);
     notifyListeners();
   }
 
@@ -59,7 +64,11 @@ class TaskProvider with ChangeNotifier {
       _completed = 0;
     }
     db.completedUpdate(data[index].modelId, _completed);
-    facthCompleted();
+    if (mSelectedIndex == 1) {
+      facthCompleted();
+    } else {
+      facthPending();
+    }
     notifyListeners();
   }
 
@@ -84,10 +93,10 @@ class TaskProvider with ChangeNotifier {
       modelTitle: taskController.text.toString(),
     ));
     taskController.clear();
-    if (_mSelectedIndex == 1) {
+    if (mSelectedIndex == 1) {
       facthCompleted();
-    } else {
-      facthData();
+    } else if (mSelectedIndex == 2) {
+      facthPending();
     }
     notifyListeners();
   }

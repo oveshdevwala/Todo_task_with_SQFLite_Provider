@@ -13,6 +13,7 @@ class DatabaseHelper {
   static const colId = 'id';
   static const colRmTime = 'Rtime';
   static const colTitle = 'title';
+  static const colCompleted = 'completed';
 // custructure
   DatabaseHelper._();
   static DatabaseHelper instance = DatabaseHelper._();
@@ -39,7 +40,8 @@ class DatabaseHelper {
 CREATE TABLE $dbTable(
   $colId $autoincrimentType,
   $colRmTime $intType,
-  $colTitle $stringType
+  $colTitle $stringType,
+  $colCompleted $intType
 )
 ''');
   }
@@ -53,14 +55,20 @@ CREATE TABLE $dbTable(
   }
 
 // facth task
-  Future<List<rModel>> facthNotes() async {
+  Future<List<rModel>> facthNotes(bool completed) async {
     var db = await getDb();
 
     List<rModel> arrydata = [];
-    var data = await db.query(dbTable);
+    var data;
+    if (completed == false) {
+      data = await db.query(dbTable);
+    } else {
+      data =
+          await db.query(dbTable, where: '$colCompleted = ?', whereArgs: [1]);
+    }
 
     for (Map<String, dynamic> eachData in data) {
-      var rmModel = rModel.fromMap(eachData);
+      var rmModel = await rModel.fromMap(eachData);
       arrydata.add(rmModel);
     }
     return arrydata;
@@ -73,9 +81,18 @@ CREATE TABLE $dbTable(
     db.delete(dbTable, where: "${colId} = ?", whereArgs: ['${id}']);
   }
 
+// task update
   Future<void> update(rModel rmodels) async {
     var db = await getDb();
     db.update(dbTable, rmodels.toMap(),
         where: '${colId} = ?', whereArgs: ['${rmodels.modelId}']);
+  }
+  // completed update
+
+  Future<void> completedUpdate(int id, int completed) async {
+    // rModel rmodel = rModel(modelCompleted: modelCompleted, modelId: modelId, modelReTime: modelReTime, modelTitle: modelTitle);
+    var db = await getDb();
+    db.update(dbTable, {colCompleted: completed},
+        where: "$colId = ?", whereArgs: ['$id']);
   }
 }
